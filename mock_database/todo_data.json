@@ -1,8 +1,1 @@
-{
-  "todos": {
-    "1234": {
-      "message": "Todo Message",
-      "id": 1234
-    }
-  }
-}
+{"todos":{"a40b99c0-a6e7-11e8-9f62-49029257bce3":{"message":"First todo","id":"a40b99c0-a6e7-11e8-9f62-49029257bce3"}}}

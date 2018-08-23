@@ -1,5 +1,8 @@
-const { getAll } = require('../models/todo_model');
+const uuidv1 = require('uuid/v1');
 
+const { getAll, create } = require('../models/todo_model');
+
+const { errorMessages } = require('../config.json');
 
 module.exports = {
   getAllTodos,
@@ -11,10 +14,10 @@ function getAllTodos(req, res) {
   getAll()
   .then(response => {
     const todos = Object.values(response.todos);
-    res.send({message: 'Got todos', data: todos, err: null});
+    return res.send({message: 'Got todos', data: todos, err: null});
   })
   .catch(err => {
-    res.status(503).send({message: err.message, data: null, err: err.errCode});
+    return res.status(503).send({message: err.message, data: null, err: err.errCode});
   });
 }
 
@@ -23,5 +26,16 @@ function deleteTodo(req, res) {
 }
 
 function createTodo(req, res) {
-  res.send({});
+  const { message } = req.body;
+  if (!message) {
+    return res.status(400).send({message: errorMessages['BAD_REQUEST'], data: null, err: 'BAD_REQUEST'});
+  }
+  create({message, id: uuidv1()})
+  .then(response => {
+    const todos = Object.values(response.todos);
+    return res.send({message: 'Added todo', data: todos, err: null});
+  })
+  .catch(err => {
+    return res.status(503).send({message: err.message, data: null, err: err.errCode});
+  });
 }
