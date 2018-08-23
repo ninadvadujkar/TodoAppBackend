@@ -18,6 +18,13 @@ $ git clone https://github.com/ninadvadujkar/TodoAppBackend.git
 ```sh
 $ cd TodoAppBackend && npm install
 ```
+The above command might not run on Windows due to presence of '&&'.
+Execute the commands in two steps for Windows as follows:
+
+```sh
+$ cd TodoAppBackend 
+$ npm install
+```
 
 3. Start the server
 
