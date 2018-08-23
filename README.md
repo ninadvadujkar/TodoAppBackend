@@ -26,3 +26,5 @@ $ npm start
 ```
 
 After these steps the server should start on port 3000 and will start serving the APIs.
+
+P.S. I wanted to add atleast a couple of unit tests but I couldn't get much time for it in the stipulated timeframe hence avoided it.
