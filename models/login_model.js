@@ -1,4 +1,5 @@
 const { userDetails } = require('../mock_database/dbdata.json');
+const { errorMessages } = require('../config.json');
 
 function LoginModel() {}
 
@@ -11,7 +12,7 @@ LoginModel.authenticate = (username, password) => {
         resolve({message: 'Login Successful'});
       } else {
         console.log('login failed');
-        reject(new Error('Login Failed'));
+        reject({message: errorMessages['LOGIN_ERR'], errCode: 'LOGIN_ERR'});
       }
     }, 1000);
   });
