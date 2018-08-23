@@ -5,6 +5,12 @@ const { errorMessages } = require('../config.json');
 const todoDBPath = './mock_database/todo_data.json';
 const jsonParseErr = { message: errorMessages['JSON_PARSE_ERR'], errCode: "JSON_PARSE_ERR" };
 
+/**
+ * @description Reads to data from db file. Returns a promise
+ * @returns
+ * Success - Object with todo list
+ * Failure - Error message with errCode
+ */
 function readDBData() {
   return new Promise((resolve, reject) => {
     fs.readFile(todoDBPath, 'utf-8', (err, resp) => {
@@ -20,6 +26,14 @@ function readDBData() {
   });
 }
 
+/**
+ * 
+ * @param {Object} data
+ * @description  Writes data to db file. Returns a promise
+ * @returns
+ * Success - Boolean true
+ * Failure - Error message with errCode
+ */
 function writeToDB(data) {
   return new Promise((resolve, reject) => {
     fs.writeFile(todoDBPath, JSON.stringify(data), (err, resp) => {
@@ -33,6 +47,9 @@ function writeToDB(data) {
 
 function TodoModel() {}
 
+/**
+ * @description Model to get all todos
+ */
 TodoModel.getAll = () => {
   return new Promise((resolve, reject) => {
     readDBData()
@@ -45,6 +62,11 @@ TodoModel.getAll = () => {
   });
 };
 
+/**
+ * 
+ * @param {string} id 
+ * @description Model to delete a todo based on id supplied
+ */
 TodoModel.del = id => {
   return new Promise((resolve, reject) => {
     readDBData()
@@ -70,6 +92,11 @@ TodoModel.del = id => {
   });
 };
 
+/**
+ * 
+ * @param {Object} newTodo 
+ * @description Model to add/create a new todo
+ */
 TodoModel.create = (newTodo) => {
   return new Promise((resolve, reject) => {
     readDBData()

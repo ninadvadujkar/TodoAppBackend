@@ -3,6 +3,14 @@ const { errorMessages } = require('../config.json');
 
 function LoginModel() {}
 
+/**
+ * 
+ * @param {string} username 
+ * @param {string} password 
+ * @returns
+ * Success - Object with succcess message
+ * Error - Object with error message and errCode
+ */
 LoginModel.authenticate = (username, password) => {
   return new Promise((resolve, reject) => {
     // Simulate delay similar to a call to Database

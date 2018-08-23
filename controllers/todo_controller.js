@@ -10,6 +10,14 @@ module.exports = {
   createTodo,
 };
 
+/**
+ * 
+ * @param {Object} req 
+ * @param {Object} res
+ * @description Controller for GET /api/todo.
+ * Success - 200 OK with todo list
+ * Failure - 503 Service Unavailable in case of backend error
+ */
 function getAllTodos(req, res) {
   getAll()
   .then(response => {
@@ -21,6 +29,16 @@ function getAllTodos(req, res) {
   });
 }
 
+/**
+ * 
+ * @param {Object} req 
+ * @param {Object} res
+ * @description Controller for DELETE /api/todo/:id.
+ * @returns 
+ * Success - 200 OK with updated todo list
+ * Failure - 503 Service Unavailable in case of backend error
+ *       - 404 Not Found when todo not found
+ */
 function deleteTodo(req, res) {
   const { id } = req.params;
   if (!id) {
@@ -38,6 +56,15 @@ function deleteTodo(req, res) {
   });
 }
 
+/**
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ * @description Controller for POST /api/todo.
+ * @returns
+ * Success - 200 OK with updated todo list
+ * Failure - 503 Service Unavailable in case of backend error
+ */
 function createTodo(req, res) {
   const { message } = req.body;
   if (!message) {

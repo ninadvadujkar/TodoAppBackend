@@ -28,6 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// define routes
 app.use('/api/login', login);
 app.use('/api/todo', todo);
 

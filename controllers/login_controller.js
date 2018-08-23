@@ -6,6 +6,15 @@ module.exports = {
   login,
 };
 
+/**
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ * @description Controller for Login API. Gets username and password from client and verifies it.
+ * @returns
+ * Success - 200 OK with updated todo list
+ * Failure - 503 Service Unavailable in case of backend error
+ */
 function login(req, res) {
   const { username, password } = req.body;
   if (!username || !password) {
