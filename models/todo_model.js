@@ -45,8 +45,29 @@ TodoModel.getAll = () => {
   });
 };
 
-TodoModel.delete = () => {
-
+TodoModel.del = id => {
+  return new Promise((resolve, reject) => {
+    readDBData()
+    .then(todos => {
+      try {
+        if (!todos.todos[id]) return reject({message: errorMessages['NOT_FOUND'], errCode: "NOT_FOUND"});
+        delete todos.todos[id];
+        writeToDB(todos)
+        .then(response => {
+          resolve(todos);
+        })
+        .catch(err => {
+          reject(err);
+        }); 
+      } catch (e) {
+        console.log(e);
+        reject(jsonParseErr);
+      }
+    })
+    .catch(err => {
+      reject(err);
+    });
+  });
 };
 
 TodoModel.create = (newTodo) => {

@@ -1,6 +1,6 @@
 const uuidv1 = require('uuid/v1');
 
-const { getAll, create } = require('../models/todo_model');
+const { getAll, create, del } = require('../models/todo_model');
 
 const { errorMessages } = require('../config.json');
 
@@ -22,7 +22,20 @@ function getAllTodos(req, res) {
 }
 
 function deleteTodo(req, res) {
-  res.send({});
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).send({message: errorMessages['BAD_REQUEST'], data: null, err: 'BAD_REQUEST'});
+  }
+  del(id)
+  .then(response => {
+    const todos = Object.values(response.todos);
+    return res.send({message: `Deleted todo ${id}`, data: todos, err: null});
+  })
+  .catch(err => {
+    if (err.errCode === 'NOT_FOUND') res.status(404);
+    else res.status(503);
+    return res.send({message: err.message, data: null, err: err.errCode});
+  });
 }
 
 function createTodo(req, res) {

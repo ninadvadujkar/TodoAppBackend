@@ -4,6 +4,7 @@
     "FETCH_ERR": "Failed to fetch data from backend",
     "LOGIN_ERR": "Login failed",
     "BAD_REQUEST": "Bad request",
-    "WRITE_ERR": "Failed to write data to backend"
+    "WRITE_ERR": "Failed to write data to backend",
+    "NOT_FOUND": "Todo not found"
   }
 }
