@@ -7,6 +7,10 @@ In order to successfully login, the username and password to be supplied is "adm
 
 ## Steps to start the server
 
+Note: Below are the node and npm versions of my machine on which this App has been developed:
+Node - 8.11.3
+NPM - 5.6.0
+
 1. Clone this repository using below command
 
 ```sh
