@@ -1,6 +1,7 @@
-const LoginModel = require('../models/login_model');
+const jwt = require('jsonwebtoken');
 
-const { errorMessages } = require('../config.json');
+const LoginModel = require('../models/login_model');
+const { errorMessages, jwtSecret } = require('../config.json');
 
 module.exports = {
   login,
@@ -22,7 +23,10 @@ function login(req, res) {
   }
   LoginModel.authenticate(username, password)
   .then(response => {
-    return res.send({message: response.message, data: null, err: null});
+    const token = jwt.sign({user: username}, jwtSecret, {
+      expiresIn : 60*60*24 // expires in a day
+    });
+    return res.send({message: response.message, data: token, err: null});
   })
   .catch(err => {
     console.log('Error in login', err);

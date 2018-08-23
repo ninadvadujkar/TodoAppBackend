@@ -2,7 +2,9 @@ const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
+const { errorMessages, jwtSecret } = require('./config.json');
 const login = require('./routes/login');
 const todo = require('./routes/todo');
 
@@ -30,6 +32,28 @@ app.use((req, res, next) => {
 
 // define routes
 app.use('/api/login', login);
+// Auth middleware
+app.use((req, res, next) => {
+  if (req.method !== "OPTIONS") {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+      // verify the token
+      jwt.verify(token, jwtSecret, (err, decodedToken) => {
+        if (err) {
+          return res.status(401).send({message: errorMessages['TOKEN_VERIFICATION_ERR'], data: null, err: 'TOKEN_VERIFICATION_ERR'});
+        }
+        // if we're here it means that token is valid
+        req.decodedToken = decodedToken;
+        next();
+      });
+    } else {
+      // If we're here it means user has not provided a token
+      return res.status(403).send({message: errorMessages['TOKEN_MISSING_ERR'], err: 'TOKEN_MISSING_ERR'});
+    }  
+  } else {
+    next();
+  }
+});
 app.use('/api/todo', todo);
 
 // catch 404 and forward to error handler

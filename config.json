@@ -5,6 +5,9 @@
     "LOGIN_ERR": "Login failed",
     "BAD_REQUEST": "Bad request",
     "WRITE_ERR": "Failed to write data to backend",
-    "NOT_FOUND": "Todo not found"
-  }
+    "NOT_FOUND": "Todo not found",
+    "TOKEN_VERIFICATION_ERR": "Failed to verify token",
+    "TOKEN_MISSING_ERR": "Token not provided"
+  },
+  "jwtSecret": "just-a-random-string"
 }
