@@ -14,7 +14,7 @@ module.exports = {
  * @description Controller for Login API. Gets username and password from client and verifies it.
  * @returns
  * Success - 200 OK with updated todo list
- * Failure - 503 Service Unavailable in case of backend error
+ * Failure - 401 Unauthorized in case of login failure
  */
 function login(req, res) {
   const { username, password } = req.body;

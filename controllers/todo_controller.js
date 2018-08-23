@@ -16,7 +16,7 @@ module.exports = {
  * @param {Object} res
  * @description Controller for GET /api/todo.
  * Success - 200 OK with todo list
- * Failure - 503 Service Unavailable in case of backend error
+ * Failure - 501 Internal Server Error in case of backend error
  */
 function getAllTodos(req, res) {
   getAll()
@@ -25,7 +25,7 @@ function getAllTodos(req, res) {
     return res.send({message: 'Got todos', data: todos, err: null});
   })
   .catch(err => {
-    return res.status(503).send({message: err.message, data: null, err: err.errCode});
+    return res.status(501).send({message: err.message, data: null, err: err.errCode});
   });
 }
 
@@ -36,7 +36,7 @@ function getAllTodos(req, res) {
  * @description Controller for DELETE /api/todo/:id.
  * @returns 
  * Success - 200 OK with updated todo list
- * Failure - 503 Service Unavailable in case of backend error
+ * Failure - 501 Internal Server Error in case of backend error
  *       - 404 Not Found when todo not found
  */
 function deleteTodo(req, res) {
@@ -51,7 +51,7 @@ function deleteTodo(req, res) {
   })
   .catch(err => {
     if (err.errCode === 'NOT_FOUND') res.status(404);
-    else res.status(503);
+    else res.status(501);
     return res.send({message: err.message, data: null, err: err.errCode});
   });
 }
@@ -63,7 +63,7 @@ function deleteTodo(req, res) {
  * @description Controller for POST /api/todo.
  * @returns
  * Success - 200 OK with updated todo list
- * Failure - 503 Service Unavailable in case of backend error
+ * Failure - 501 Internal Server Error in case of backend error
  */
 function createTodo(req, res) {
   const { message } = req.body;
@@ -76,6 +76,6 @@ function createTodo(req, res) {
     return res.send({message: 'Added todo', data: todos, err: null});
   })
   .catch(err => {
-    return res.status(503).send({message: err.message, data: null, err: err.errCode});
+    return res.status(501).send({message: err.message, data: null, err: err.errCode});
   });
 }
