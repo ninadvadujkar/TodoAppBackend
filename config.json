@@ -1,0 +1,8 @@
+{
+  "errorMessages": {
+    "JSON_PARSE_ERR": "Failed to parse data from database",
+    "FETCH_ERR": "Failed to fetch data from backend",
+    "LOGIN_ERR": "Login failed",
+    "BAD_REQUEST": "Bad request"
+  }
+}
