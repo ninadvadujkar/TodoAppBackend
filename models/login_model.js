@@ -22,7 +22,7 @@ LoginModel.authenticate = (username, password) => {
         console.log('login failed');
         reject({message: errorMessages['LOGIN_ERR'], errCode: 'LOGIN_ERR'});
       }
-    }, 1000);
+    }, 500);
   });
 };
 
